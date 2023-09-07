@@ -71,17 +71,20 @@ export default {
                     if (tmp_user_solution[idx] == tmp_real_solution[idx]) {
                         red++;
                         // Mark as used.
-                        tmp_real_solution[idx] = null;
+                        tmp_real_solution[idx] = null
+                        tmp_user_solution[idx] = null
                     }
                 }
             }
             // Check misplaced elemetns 
             for (var idx in tmp_user_solution) {
-                const tmp_index = tmp_real_solution.indexOf(tmp_user_solution[idx]);
-                if (tmp_index !== -1) {
-                    white++;
-                    // Mark as used.
-                    tmp_real_solution[tmp_index] = null;
+                if (tmp_user_solution[idx]) {
+                    const tmp_index = tmp_real_solution.indexOf(tmp_user_solution[idx]);
+                    if (tmp_index !== -1) {
+                        white++;
+                        // Mark as used.
+                        tmp_real_solution[tmp_index] = null;
+                    }
                 }
             }
             // Final check
