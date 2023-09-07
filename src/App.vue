@@ -13,7 +13,8 @@ header {
   line-height: 1.5;
 }
 main {
-  height: 1381px;
+  min-height: 1380px;
+  min-width: 800px;
 }
 
 .logo {

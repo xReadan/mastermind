@@ -178,7 +178,8 @@ export default {
     border-radius: 5px;
     box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.2);
     stroke-width: 1;
-    left: 660px;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .solution-block {

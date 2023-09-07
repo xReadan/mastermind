@@ -17,7 +17,8 @@ export default {
 <style scoped>
 .color-selector {
     position: fixed;
-    left: 660px;
+    left: 50%;
+    transform: translate(-50%, 0);
     bottom: 20px;
     width: 600px;
     height: 66px;
