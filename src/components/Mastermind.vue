@@ -1,7 +1,7 @@
 <script setup>
 import ColorsSelector from './game_components/ColorsSelector.vue'
 import SolutionRow from './game_components/SolutionRow.vue';
-import { COLORS } from '../colors_buttons.js'
+import { COLORS, CORRECT_POSITION_COLOR, CORRECT_COLOR } from '../colors_buttons.js'
 </script>
 
 <template>
@@ -59,7 +59,10 @@ export default {
             // Check missing elements and correct guess
             for (var idx in tmp_user_solution) {
                 if (tmp_user_solution[idx] == "") {
-                    alert("You are missing a input!")
+                    this.$toast.info("Missing input, please fill the colors!", {
+                        duration: 2000,
+                        position: "top"
+                    });
                     return
                 } else {
                     if (tmp_user_solution[idx] == tmp_real_solution[idx]) {
@@ -80,23 +83,50 @@ export default {
             }
             // Final check
             if (red == 4) {
-                alert("You Won!")
+                this.$swal({
+                    title: 'Congratulations!',
+                    width: 600,
+                    padding: '3em',
+                    background: '#fff url(/src/assets/confetti.gif)',
+                    confirmButtonText: "Play Again!",
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Close',
+                    showCancelButton: true
+                }).then(function (result) {
+                    if (result.value) {
+                        location.reload()
+                    }
+                });
                 this.show_solution = true
             } else {
                 // Fill user feedback
                 var input_check_idx = 0
                 for (var i = 0; i < red; i++) {
-                    this.user_solutions[this.current_idx].check[input_check_idx].color = "#ff0000"
+                    this.user_solutions[this.current_idx].check[input_check_idx].color = CORRECT_POSITION_COLOR
                     input_check_idx++
                 }
                 for (var i = 0; i < white; i++) {
-                    this.user_solutions[this.current_idx].check[input_check_idx].color = "#ffffff"
+                    this.user_solutions[this.current_idx].check[input_check_idx].color = CORRECT_COLOR
                     input_check_idx++
                 }
             }
             // Check tentatives
             if (this.current_idx == 0) {
-                alert("You Lost!")
+                this.$swal({
+                    title: 'Game Over!',
+                    width: 600,
+                    padding: '3em',
+                    confirmButtonText: "Play Again!",
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Close',
+                    showCancelButton: true
+                }).then(function (result) {
+                    if (result.value) {
+                        location.reload()
+                    }
+                });
             } else {
                 this.current_idx--
             }
@@ -113,6 +143,7 @@ export default {
             var tmp_solution = []
             var tmp_check = []
             for (var y of Array(4).keys()) {
+                // Create unique ids
                 var tmp_solution_id = x + "u" + y
                 var tmp_check_id = x + "c" + y
                 tmp_solution.push({ key: tmp_solution_id, id: '', color: '' })
@@ -128,9 +159,10 @@ export default {
                     _self.show_solution = !_self.show_solution;
                 }
             });
+            // Display app
             setTimeout(() => {
                 _self.app_ready = true;
-            }, 500);
+            }, 50);
         });
     }
 }

@@ -32,3 +32,6 @@ export const COLORS = [
         color: "#872e2e"
     }
 ]
+
+export const CORRECT_POSITION_COLOR = "#ff0000"
+export const CORRECT_COLOR = "#ffffff"
