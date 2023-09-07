@@ -16,7 +16,7 @@ import { COLORS, CORRECT_POSITION_COLOR, CORRECT_COLOR } from '../colors_buttons
         <!-- User input -->
         <div v-for="(item, index) in user_solutions" :key="index">
             <SolutionRow :index="index" :input_solution="item" :active="index == current_idx" @inputClicked="inputClicked"
-                @solutionSubmitted="checkInputs" />
+                @solutionSubmitted="checkInputs" @droppedColor="droppedColor" />
         </div>
     </div>
     <ColorsSelector :colors="colors" @colorClicked="colorSelected" />
@@ -48,6 +48,9 @@ export default {
                 // Reset selected index
                 this.color_selected_index = -1
             }
+        },
+        droppedColor(data) {
+            this.user_solutions[this.current_idx].solution[data.index] = data.color
         },
         checkInputs() {
             // Create tmp variable for better handling

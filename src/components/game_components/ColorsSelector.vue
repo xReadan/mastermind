@@ -1,7 +1,7 @@
 <template>
     <div class="color-selector">
         <div v-for="(item, index) in colors" :key="item.key" class="color-button" :style="{ backgroundColor: item.color }"
-            @click="$emit('colorClicked', index)">
+            @click="$emit('colorClicked', index)" draggable="true" @dragstart="startDrag($event, item)">
         </div>
     </div>
 </template>
@@ -10,6 +10,14 @@
 export default {
     props: {
         colors: Array
+    },
+    methods: {
+        startDrag(event, item) {
+            event.dataTransfer.dropEffect = 'move'
+            event.dataTransfer.effectAllowed = 'move'
+            // Send dragged item data
+            event.dataTransfer.setData('item', JSON.stringify(item))
+        },
     }
 }
 </script>

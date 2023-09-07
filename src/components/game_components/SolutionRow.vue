@@ -3,6 +3,9 @@
         <div class="solution-input-block">
             <div v-for="(item, index) in input_solution.solution" class="solution-input-button" :key="item.key"
                 :style="{ backgroundColor: item.color }" :class="{ enabled: active }" @click="input_clicked(index)">
+                <!-- Draggable zone -->
+                <div v-if="active" class="solution-draggable-target" @drop="onDrop($event, index)" @dragenter.prevent
+                    @dragover.prevent></div>
             </div>
         </div>
         <div class="solution-input-check">
@@ -34,6 +37,10 @@ export default {
             if (this.active) {
                 this.$emit('inputClicked', index);
             }
+        },
+        onDrop(event, index) {
+            var dragged_color = JSON.parse(event.dataTransfer.getData('item'));
+            this.$emit('droppedColor', { index: index, color: dragged_color })
         }
     },
 }
@@ -126,6 +133,11 @@ export default {
     width: 28px;
     height: 28px;
     fill: #ffffff;
+}
+
+.solution-draggable-target {
+    width: 100%;
+    height: 100%;
 }
 
 .enabled {
