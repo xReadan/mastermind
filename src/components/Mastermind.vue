@@ -93,7 +93,7 @@ export default {
                     title: 'Congratulations!',
                     width: 600,
                     padding: '3em',
-                    background: '#fff url(/src/assets/confetti.gif)',
+                    background: '#fff url(https://i.gifer.com/6SSp.gif)',
                     confirmButtonText: "Play Again!",
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
