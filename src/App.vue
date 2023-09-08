@@ -14,7 +14,6 @@ header {
 }
 main {
   min-height: 1380px;
-  min-width: 800px;
 }
 
 .logo {

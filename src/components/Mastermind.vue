@@ -188,6 +188,12 @@ export default {
     transform: translate(-50%, 0);
 }
 
+@media only screen and (max-width: 600px) {
+    .game-table {
+        transform: translate(-25%, 0);
+    }
+}
+
 .solution-block {
     width: 474px;
     height: 100px;
