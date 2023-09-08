@@ -9,8 +9,8 @@ import { COLORS, CORRECT_POSITION_COLOR, CORRECT_COLOR } from '../colors_buttons
         <!-- Solution header -->
         <div class="solution-block">
             <div v-for="item in solution" class="solution-button">
-                <img src="../assets/question_mark.svg" v-if="!show_solution">
                 <div class="solution-button-filled" v-if="show_solution" :style="{ background: item.color }"></div>
+                <img src="../assets/question_mark.svg" v-else>
             </div>
         </div>
         <!-- User input -->
